@@ -1,4 +1,5 @@
 from decorators import string_fn, array_fn
+from random import randrange, shuffle
 
 
 def _get_arg(args, index, default=None):
@@ -50,3 +51,17 @@ def accept(input, *args):
     comparator = _get_arg(args, 0, '')
 
     return [el for el in input if el == comparator]
+
+
+@array_fn
+def shuffle(input, *args):
+    shuffle(input)
+    return input
+
+
+@array_fn
+def juggle(input, *args):
+    for _ in xrange(0, randrange(1, 10)):
+        input.insert(0, input.pop())
+
+    return input
