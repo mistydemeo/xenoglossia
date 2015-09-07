@@ -1,4 +1,4 @@
-from decorators import string_fn, array_fn
+from decorators import string_fn, array_fn, xenoglossia_fn
 from random import randrange, shuffle
 
 
@@ -9,6 +9,7 @@ def _get_arg(args, index, default=None):
         return default
 
 
+@xenoglossia_fn
 @string_fn
 def burst(input, *args):
     """
@@ -23,6 +24,7 @@ def burst(input, *args):
         return input.split(separator)
 
 
+@xenoglossia_fn
 def collapse(input, *args):
     """
     args[0]: joiner
@@ -33,6 +35,7 @@ def collapse(input, *args):
     return joiner.join(input)
 
 
+@xenoglossia_fn
 @string_fn
 def sub(input, *args):
     """
@@ -47,6 +50,7 @@ def sub(input, *args):
     return input.replace(original, replacement, 1)
 
 
+@xenoglossia_fn
 @string_fn
 def gsub(input, *args):
     """
@@ -61,6 +65,7 @@ def gsub(input, *args):
     return input.replace(original, replacement)
 
 
+@xenoglossia_fn
 @array_fn
 def reject(input, *args):
     """
@@ -73,6 +78,7 @@ def reject(input, *args):
     return [el for el in input if el != comparator]
 
 
+@xenoglossia_fn
 @array_fn
 def accept(input, *args):
     """
@@ -85,6 +91,7 @@ def accept(input, *args):
     return [el for el in input if el == comparator]
 
 
+@xenoglossia_fn
 @array_fn
 def shuffle(input, *args):
     """
@@ -94,6 +101,7 @@ def shuffle(input, *args):
     return input
 
 
+@xenoglossia_fn
 @array_fn
 def juggle(input, *args):
     """
