@@ -2,6 +2,9 @@ import builtins
 
 from pyparsing import Group, OneOrMore,  Word, QuotedString, ZeroOrMore, alphas, alphanums
 
+class NameError(Exception):
+    pass
+
 sq_string = QuotedString( quoteChar="'" )
 dq_string = QuotedString( quoteChar='"' )
 STRING = sq_string ^ dq_string
@@ -21,7 +24,10 @@ def run_program(input, program):
     tokens = tokenize(program)
 
     for token in tokens:
-        func = getattr(builtins, token['function'])
+        try:
+            func = getattr(builtins, token['function'])
+        except AttributeError:
+            raise NameError('Unknown function: {}'.format(token['function']))
         input = func(input, *token['arguments'])
 
     if isinstance(input, list):
