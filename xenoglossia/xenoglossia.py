@@ -34,7 +34,7 @@ def run_program(input, program):
         try:
             func = getattr(builtins, token['function'])
         except AttributeError:
-            raise NameError('Unknown function: {}'.format(token['function']))
+            raise NameError(token['function'])
         input = func(input, *token['arguments'])
 
     if isinstance(input, list):
