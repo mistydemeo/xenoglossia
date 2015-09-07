@@ -1,8 +1,11 @@
 import builtins
 
-from pyparsing import Group, OneOrMore,  Word, QuotedString, ZeroOrMore, alphas, alphanums
+from pyparsing import ParseException, Group, OneOrMore,  Word, QuotedString, ZeroOrMore, alphas, alphanums
 
 class NameError(Exception):
+    pass
+
+class ParseError(Exception):
     pass
 
 sq_string = QuotedString( quoteChar="'" )
@@ -17,7 +20,11 @@ PROGRAM = OneOrMore ( FUNCTION_CALL )
 
 
 def tokenize(program):
-    return [{'function': el[0], 'arguments': el[1:] } for el in PROGRAM.parseString(program)]
+    try:
+        return [{'function': el[0], 'arguments': el[1:] } for el in PROGRAM.parseString(program)]
+    except ParseException as e:
+        # wrap the orginal exception in a local type
+        raise ParseError(e)
 
 
 def run_program(input, program):
