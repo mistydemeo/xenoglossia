@@ -1,5 +1,6 @@
 from decorators import string_fn, array_fn, xenoglossia_fn
 from random import randrange, shuffle
+import re
 
 
 def _get_arg(args, index, default=None):
@@ -81,6 +82,28 @@ def gsub(input, *args):
     replacement = _get_arg(args, 1, '')
 
     return input.replace(original, replacement)
+
+
+@xenoglossia_fn
+@string_fn
+def query(input, *args):
+    """
+    args[0]: query
+
+    Searches *input* for any occurrences of *query*, and returns the first or, if there is no match, *input*.
+    *query* is interpreted as a regular expression.
+    """
+    query = _get_arg(args, 0, '')
+
+    try:
+        match = re.match(query, input)
+    except:  # regex doesn't parse
+        return input
+
+    if match is not None and match.group():
+        return match.group()[0]
+    else:
+        return input
 
 
 @xenoglossia_fn
