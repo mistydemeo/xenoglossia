@@ -15,7 +15,7 @@ def main():
     sucess = 0
     args = _parse_args()
     if not args.input:
-        args.input = sys.stdin.read()
+        args.input = sys.stdin.read().rstrip("\r\n")
 
     try:
         result = run_program(args.input, args.command)
