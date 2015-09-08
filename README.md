@@ -44,3 +44,11 @@ Rearrange the words in a sentence, then capitalize the new sentence:
 ```
 burst " " shuffle capitalize
 ```
+
+# TODO
+
+* Add support for user-supplied modules of functions
+
+# Known bugs
+
+* Illegal function identifiers (for example, identifiers beginning with a number) are only flagged for the first function call in a series; otherwise the function call is simply skipped during parsing.
