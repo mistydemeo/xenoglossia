@@ -6,7 +6,7 @@
 Xenoglossia is a simple string manipulation language, akin to sed.
 It was created with the goal of producing surprising, fun-to-read programs which can be generated in novel manners by a computer.
 
-An introduction to the language and its syntax can be found in the [design document](docs/design.md), and the documentation of the builtin functions can currently be found in the docstrings of the [builtins module](xenoglossia/builtins.py).
+An introduction to the language and its syntax can be found in the [design document](doc/design.md), and the documentation of the builtin functions can currently be found in the docstrings of the [builtins module](xenoglossia/builtins.py).
 
 # Installation
 
