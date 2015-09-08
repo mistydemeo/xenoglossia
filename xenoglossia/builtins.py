@@ -126,6 +126,23 @@ def part_title(input, *args):
 
 @xenoglossia_fn
 @string_fn
+def shout(input, *args):
+    """
+    Converts every character of *input* to uppercase.
+    """
+    return input.upper()
+
+
+@xenoglossia_fn
+@string_fn
+def whisper(input, *args):
+    """
+    Converts every character of *input* to lowercase.
+    """
+    return input.lower()
+
+@xenoglossia_fn
+@string_fn
 def illuminate(input, *args):
     """
     Renders the first character in *input* as a Fraktur capital letter, and all other characters as lower case.
