@@ -107,6 +107,24 @@ def query(input, *args):
 
 
 @xenoglossia_fn
+@string_fn
+def title(input, *args):
+    """
+    Capitalizes *input* as a title: capitalizes the first letter in every word, with other characters rendered in lowercase.
+    """
+    return input.title()
+
+
+@xenoglossia_fn
+@string_fn
+def part_title(input, *args):
+    """
+    Capitalizes the first letter of *input*, and renders all other characters in lowercase.
+    """
+    return input.capitalize()
+
+
+@xenoglossia_fn
 @array_fn
 def reject(input, *args):
     """
