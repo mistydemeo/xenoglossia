@@ -9,6 +9,24 @@ def _get_arg(args, index, default=None):
         return default
 
 
+def _coerce_int(string):
+    """
+    Coerces `string` into an integer.
+
+    Attempts to parse `string` as an integer.
+    If `string` is empty, returns None.
+    If `string` cannot be parsed into an integer, returns the sum of the Unicode ordinals of all characters in `string`.
+    """
+    if not string:
+        return
+    else:
+        try:
+            return int(string)
+        # cannot parse
+        except ValueError:
+            return reduce(lambda i, n: i + ord(n), list(string), 0)
+
+
 @xenoglossia_fn
 @string_fn
 def burst(input, *args):
@@ -113,5 +131,26 @@ def juggle(input, *args):
     """
     for _ in xrange(0, randrange(1, 10)):
         input.insert(0, input.pop())
+
+    return input
+
+
+@xenoglossia_fn
+@array_fn
+def interject(input, *args):
+    """
+    arg[0]: interjection
+    arg[1]: index
+
+    Inserts *interjection* into *input* at *index*.
+    If *index* is not provided, selects a random index between 0 and the end of *input*.
+    If *index* is provided but cannot be parsed into an integer, calculates a value by summing the Unicode codepoint ordinals of all of the characters in *count*.
+    """
+    interjection = _get_arg(args, 0, '')
+    index = _coerce_int(_get_arg(args, 1, ''))
+    if index is None:
+        index = randrange(0, len(input))
+
+    input.insert(index, interjection)
 
     return input
