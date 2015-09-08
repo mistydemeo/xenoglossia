@@ -86,6 +86,40 @@ def gsub(input, *args):
 
 @xenoglossia_fn
 @string_fn
+def transubstantiate(input, *args):
+    """
+    args[0]: pattern
+    args[1]: replacement
+
+    Searches *input* for *pattern*, which is a regular expression, and replaces the first occurrence with *replacement*.
+    """
+    pattern = _get_arg(args, 0, '')
+    replacement = _get_arg(args, 1, '')
+    try:
+        return re.sub(pattern, replacement, input, count=1)
+    except:  # regex doesn't parse
+        return input
+
+
+@xenoglossia_fn
+@string_fn
+def transubstantiate_all(input, *args):
+    """
+    args[0]: pattern
+    args[1]: replacement
+
+    Searches *input* for *pattern*, which is a regular expression, and replaces all occurrences with *replacement*.
+    """
+    pattern = _get_arg(args, 0, '')
+    replacement = _get_arg(args, 1, '')
+    try:
+        return re.sub(pattern, replacement, input)
+    except:  # regex doesn't parse
+        return input
+
+
+@xenoglossia_fn
+@string_fn
 def query(input, *args):
     """
     args[0]: query
