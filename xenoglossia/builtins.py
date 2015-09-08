@@ -125,6 +125,28 @@ def part_title(input, *args):
 
 
 @xenoglossia_fn
+@string_fn
+def illuminate(input, *args):
+    """
+    Renders the first character in *input* as a Fraktur capital letter, and all other characters as lower case.
+
+    If the first character is not a character in the range of A to Z, leaves it unchanged.
+    """
+    try:
+        firstchr = input[0].lower()
+    except IndexError:  # empty string
+        return input
+
+    i = ord(firstchr)
+    if i in range(97, 122):
+        # unichr() won't work for narrow Python builds
+        illuminated = ("\\U%08x" % (i - 97 + 120068)).decode('unicode-escape')
+        return illuminated + input[1:].lower()
+    else:
+        return input[0] + input[1:].lower()
+
+
+@xenoglossia_fn
 @array_fn
 def reject(input, *args):
     """
