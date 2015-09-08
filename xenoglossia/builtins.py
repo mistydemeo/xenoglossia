@@ -154,3 +154,16 @@ def interject(input, *args):
     input.insert(index, interjection)
 
     return input
+
+
+@xenoglossia_fn
+def arrange(input, *args):
+    """
+    Arrange all of the elements of *input* in alphabetical order.
+
+    If *input* is a string, returns the string unmodified, because sorting a string results in a boring output.
+    """
+    if isinstance(input, basestring):
+        return input
+    else:
+        return sorted(input)
