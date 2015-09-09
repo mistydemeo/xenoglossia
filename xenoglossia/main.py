@@ -19,6 +19,8 @@ def main():
     args = _parse_args()
     if not args.input:
         args.input = sys.stdin.read().rstrip("\r\n")
+    if isinstance(args.input, str):
+        args.input = args.input.decode('utf-8', errors='ignore')
 
     try:
         result = run_program(args.input, args.command)
