@@ -175,6 +175,7 @@ def whisper(input, *args):
     """
     return input.lower()
 
+
 @xenoglossia_fn
 @string_fn
 def illuminate(input, *args):
