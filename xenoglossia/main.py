@@ -7,11 +7,13 @@ import sys
 
 from xenoglossia import NameError, ParseError, run_program
 
+
 def _parse_args():
     parser = ArgumentParser()
     parser.add_argument("-i", "--input", help="input string", required=False)
     parser.add_argument("command", help="command")
     return parser.parse_args()
+
 
 def main():
     args = _parse_args()
@@ -34,5 +36,4 @@ def main():
     return 0
 
 if __name__ == '__main__':
-    import sys
     sys.exit(main())
