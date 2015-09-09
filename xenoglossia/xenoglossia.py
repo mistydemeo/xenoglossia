@@ -22,8 +22,13 @@ PROGRAM = OneOrMore( FUNCTION_CALL )
 
 
 def tokenize(program):
+    # String literals are defined as being UTF-8;
+    # skip any characters that don't decode.
+    def decode(s):
+        return s.decode('utf-8', errors='ignore')
+
     try:
-        return [{'function': el[0], 'arguments': el[1:]} for el in PROGRAM.parseString(program)]
+        return [{'function': el[0], 'arguments': map(decode, el[1:])} for el in PROGRAM.parseString(program)]
     except ParseException as e:
         # wrap the orginal exception in a local type
         raise ParseError(e)
