@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="xenoglossia",
-    description=" Robust(?) string manipulation language",
+    description="Robust(?) string manipulation language",
     author="Misty De Meo",
     author_email="mistydemeo@gmail.com",
     license="kindest",
