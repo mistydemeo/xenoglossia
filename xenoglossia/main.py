@@ -1,6 +1,8 @@
 from __future__ import print_function
 
 from argparse import ArgumentParser
+import codecs
+import locale
 import sys
 
 from xenoglossia import NameError, ParseError, run_program
@@ -27,7 +29,8 @@ def main():
         print("Unable to parse provided program: {}".format(e))
         return 64
 
-    print(result)
+    writer = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
+    print(result, file=writer)
 
     return 0
 
