@@ -14,7 +14,6 @@ def _parse_args():
     return parser.parse_args()
 
 def main():
-    sucess = 0
     args = _parse_args()
     if not args.input:
         args.input = sys.stdin.read().rstrip("\r\n")
