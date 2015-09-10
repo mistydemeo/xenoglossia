@@ -1,6 +1,11 @@
-from decorators import string_fn, array_fn, xenoglossia_fn
+from __future__ import absolute_import
+
+from .decorators import string_fn, array_fn, xenoglossia_fn
 from random import randrange, shuffle
 import re
+
+from six import string_types
+from six.moves import range, reduce
 
 
 def _get_arg(args, index, default=None):
@@ -244,7 +249,7 @@ def juggle(input, *args):
 
     ["1", "2", "3", "4", "5"] => ["3", "4", "5", "1", "2"]
     """
-    for _ in xrange(0, randrange(1, 10)):
+    for _ in range(0, randrange(1, 10)):
         input.insert(0, input.pop())
 
     return input
@@ -278,7 +283,7 @@ def arrange(input, *args):
 
     If *input* is a string, returns the string unmodified, because sorting a string results in a boring output.
     """
-    if isinstance(input, basestring):
+    if isinstance(input, string_types):
         return input
     else:
         return sorted(input)

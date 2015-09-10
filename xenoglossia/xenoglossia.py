@@ -1,6 +1,9 @@
-import builtins
+from __future__ import absolute_import
+
+from . import builtins
 
 from pyparsing import ParseException, Group, OneOrMore, Word, QuotedString, ZeroOrMore, alphas, alphanums
+import six
 
 
 class NameError(Exception):
@@ -25,7 +28,10 @@ def tokenize(program):
     # String literals are defined as being UTF-8;
     # skip any characters that don't decode.
     def decode(s):
-        return s.decode('utf-8', errors='ignore')
+        if six.PY2:
+            return s.decode('utf-8', errors='ignore')
+        else:
+            return s
 
     try:
         return [{'function': el[0], 'arguments': map(decode, el[1:])} for el in PROGRAM.parseString(program)]

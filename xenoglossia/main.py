@@ -1,11 +1,13 @@
-from __future__ import print_function
+from __future__ import absolute_import, print_function
 
 from argparse import ArgumentParser
 import codecs
 import locale
 import sys
 
-from xenoglossia import NameError, ParseError, run_program
+import six
+
+from .xenoglossia import NameError, ParseError, run_program
 
 
 def _parse_args():
@@ -19,7 +21,7 @@ def main():
     args = _parse_args()
     if not args.input:
         args.input = sys.stdin.read().rstrip("\r\n")
-    if isinstance(args.input, str):
+    if six.PY2:
         args.input = args.input.decode('utf-8', errors='ignore')
 
     try:
@@ -32,7 +34,10 @@ def main():
         print("Unable to parse provided program: {}".format(e))
         return 64
 
-    writer = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
+    if six.PY2:
+        writer = codecs.getwriter(locale.getpreferredencoding())(sys.stdout)
+    else:
+        writer = sys.stdout
     print(result, file=writer)
 
     return 0
