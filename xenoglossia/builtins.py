@@ -218,6 +218,18 @@ def illuminate(input, *args):
     else:
         return input[0] + input[1:].lower()
 
+@xenoglossia_fn
+@string_fn
+def flirt(input, *args):
+    """
+    Converts every character of *input* to full-width.
+    """
+
+    char_map = {i: ("\\U%08x" % (i - 33 + 65281)).decode('unicode-escape') for i in range(33, 126)}
+    # don't forget the ideographic space character! it's important!
+    char_map[32] = ("\\U%08x" % 12288).decode('unicode-escape')
+
+    return ''.join([char_map.get(ord(c), c) for c in input])
 
 @xenoglossia_fn
 @array_fn
