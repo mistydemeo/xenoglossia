@@ -81,7 +81,7 @@ If the terminating function in a series returns an array, then the array will be
 Functions may use other types internally if this is convenient to the implementation, as long as no other types are exposed to the programmer.
 Function input, arguments, and return values can only be strings or arrays.
 
-## Coersion
+## Coercion
 
 Some functions expect to operate on strings, and others expect to operate on arrays.
 All functions must be able to accept an input in either type and convert it to the appropriate type before proceeding.
