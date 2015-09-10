@@ -10,6 +10,18 @@ An introduction to the language and its syntax can be found in the [design docum
 
 # Installation
 
+You can install this package using Python's `pip` package manager:
+
+```
+pip install xenoglossia
+```
+
+If you use Mac OS X, you can also install it using [Homebrew](http://brew.sh):
+
+```
+brew install mistydemeo/formulae/xenoglossia
+```
+
 Clone the repository, and then run:
 
 ```
