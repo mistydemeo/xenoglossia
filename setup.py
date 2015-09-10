@@ -9,4 +9,5 @@ setup(
     version="0.1",
     packages=["xenoglossia"],
     entry_points={"console_scripts": ["xg = xenoglossia.main:main"]},
+    install_requires="pyparsing>=2,<3",
 )
