@@ -87,13 +87,13 @@ Some functions expect to operate on strings, and others expect to operate on arr
 All functions must be able to accept an input in either type and convert it to the appropriate type before proceeding.
 
 The specific manner of the conversion is function-specific.
-Most functions use the following coersions:
+Most functions use the following coercions:
 
 * Split a string into an array of individual characters, for example `"string"` => `["s", "t", "r", "i", "n", "g"]`
 * Join an array without any separators, for example `["s", "t", "r", "i", "n", "g"]` => `"string"`
 
 This is not a hard and fast rule, however.
-If using different coersion rules produces a more interesting result, do so.
+If using different coercion rules produces a more interesting result, do so.
 
 The latter array-to-string conversion is used when returning the final output of a program.
 
