@@ -208,6 +208,14 @@ def ransomize(input, *args):
 
 @xenoglossia_fn
 @string_fn
+def buttify(input, *args):
+    """
+    Replaces each occurrence of but or butt with the butt emoji. (And no... it's not the peach emoji.)
+    """
+    return re.sub("(?i)(butt|but)", u"\U0001F351", input)
+
+@xenoglossia_fn
+@string_fn
 def part_title(input, *args):
     """
     Capitalizes the first letter of *input*, and renders all other characters in lowercase.
