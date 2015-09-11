@@ -214,6 +214,18 @@ def buttify(input, *args):
     """
     return re.sub("(?i)(butt|but)", u"\U0001F351", input)
 
+_DOTMATRIX_CHARS = ["⡮⢵", "⣟⣳", "⢎⣉", "⣏⡱", "⣟⣋", "⡯⠍", "⢎⣥", "⡗⢺", "⡇", "⢉⠏", "⡧⢎", "⣇⣀", "⡗⢺"
+                   ,"⡗⢼", "⢎⡱", "⡯⠕", "⢎⣵", "⡯⢕", "⣚⡫", "⢹⡏", "⢇⡸", "⢣⡜", "⡧⢼", "⡱⢎", "⢱⡎", "⣩⣋"]
+_DOTMATRIX_CHAR_DICT = dict(zip(ascii_uppercase, _DOTMATRIX_CHARS))
+
+@xenoglossia_fn
+@string_fn
+def dotmatrix(input, *args):
+    """
+    Converts *input* into dot matrix printer format.
+    (NOTA BENE: this code has not been tested on an actual dot matrix printer.)
+    """
+    return "".join(map(lambda c: _DOTMATRIX_CHAR_DICT.get(c, c).decode("utf8"), input.upper()))
 
 @xenoglossia_fn
 @string_fn
