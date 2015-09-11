@@ -176,7 +176,7 @@ def generate_char_map(start_code):
     Generates a dictionary mapping capitals A through Z with
     the set of Unicode characters starting at start_code.
     """
-    char_list = map(lambda (i): ("\\U%08x" % (i+start_code)).decode('unicode-escape'), range(0, 25))
+    char_list = map(lambda i: b("\\U%08x" % (i+start_code)).decode('unicode-escape'), range(0, 25))
     return dict(zip(ascii_uppercase, char_list))
 
 _STARTING_CODES = [119860 # capital italic
@@ -195,7 +195,7 @@ _STARTING_CODES = [119860 # capital italic
                   ,120380 # capital bold italic
                   ,120458 # lowercase monospaced
                   ]
-_CHAR_MAPS = map(lambda (sc): generate_char_map(sc), _STARTING_CODES)
+_CHAR_MAPS = [generate_char_map(sc) for sc in _STARTING_CODES]
 
 @xenoglossia_fn
 @string_fn
@@ -203,7 +203,7 @@ def ransomize(input, *args):
     """
     Replaces each character of *input* with its companion character from a random code point.
     """
-    return "".join(map(lambda (c): _CHAR_MAPS[randint(0, len(_CHAR_MAPS)-1)].get(c, c), input.upper()))
+    return "".join(map(lambda c: _CHAR_MAPS[randint(0, len(_CHAR_MAPS)-1)].get(c, c), input.upper()))
 
 @xenoglossia_fn
 @string_fn
