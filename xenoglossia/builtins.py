@@ -4,7 +4,7 @@ from .decorators import string_fn, array_fn, xenoglossia_fn
 from random import randrange, shuffle
 import re
 
-from six import string_types
+from six import b, string_types
 from six.moves import range, reduce
 
 
@@ -213,7 +213,7 @@ def illuminate(input, *args):
     i = ord(firstchr)
     if i in range(97, 122):
         # unichr() won't work for narrow Python builds
-        illuminated = ("\\U%08x" % (i - 97 + 120068)).decode('unicode-escape')
+        illuminated = b("\\U%08x" % (i - 97 + 120068)).decode('unicode-escape')
         return illuminated + input[1:].lower()
     else:
         return input[0] + input[1:].lower()
@@ -226,9 +226,9 @@ def flirt(input, *args):
     Converts every character of *input* to full-width.
     """
 
-    char_map = {i: ("\\U%08x" % (i - 33 + 65281)).decode('unicode-escape') for i in range(33, 127)}
+    char_map = {i: b("\\U%08x" % (i - 33 + 65281)).decode('unicode-escape') for i in range(33, 127)}
     # don't forget the ideographic space character! it's important!
-    char_map[32] = ("\\U%08x" % 12288).decode('unicode-escape')
+    char_map[32] = b("\\U%08x" % 12288).decode('unicode-escape')
 
     return ''.join([char_map.get(ord(c), c) for c in input])
 
