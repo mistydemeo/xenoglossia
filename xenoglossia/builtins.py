@@ -164,7 +164,7 @@ def flip(input, *args):
     """
     Returns an upside down version of *input* prepended by our favorite Flip Table dude.
     """
-    flipped_input = "".join(map(lambda (c): _FLIP_CHAR_DICT.get(c, c), input)[::-1])
+    flipped_input = "".join(_FLIP_CHAR_DICT.get(c, c) for c in input[::-1])
     return u"\uFF08\u256F\u00B0\u25A1\u00B0\uFF09\u256F\uFE35 " + flipped_input
 
 @xenoglossia_fn
