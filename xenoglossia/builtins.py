@@ -214,6 +214,7 @@ def buttify(input, *args):
     """
     return re.sub("(?i)(butt|but)", u"\U0001F351", input)
 
+
 @xenoglossia_fn
 @string_fn
 def part_title(input, *args):
