@@ -1,8 +1,9 @@
 from __future__ import absolute_import
 
 from .decorators import string_fn, array_fn, xenoglossia_fn
-from random import randrange, shuffle
+from random import randrange, shuffle, randint
 import re
+from string import ascii_uppercase
 
 from six import b, string_types
 from six.moves import range, reduce
@@ -169,6 +170,40 @@ def flip(input, *args):
     flipped_input = "".join(_FLIP_CHAR_DICT.get(c, c) for c in input[::-1])
     return u"\uFF08\u256F\u00B0\u25A1\u00B0\uFF09\u256F\uFE35 " + flipped_input
 
+
+def generate_char_map(start_code):
+    """
+    Generates a dictionary mapping capitals A through Z with
+    the set of Unicode characters starting at start_code.
+    """
+    char_list = map(lambda (i): ("\\U%08x" % (i+start_code)).decode('unicode-escape'), range(0, 25))
+    return dict(zip(ascii_uppercase, char_list))
+
+_STARTING_CODES = [119860 # capital italic
+                  ,120016 # capital bold script
+                  ,120042 # lowercase bold script
+                  ,120094 # lowercase Fraktur small
+                  ,120146 # lowercase double-struck𝔞
+                  ,120172 # capital Fraktur
+                  ,120198 # lowercase Fraktur
+                  ,120224 # capital sans serif
+                  ,120250 # lowercase sans serif
+                  ,120276 # capital bold sans serif
+                  ,120302 # lowercase bold sans serif
+                  ,120328 # capital sans serif italic
+                  ,120354 # lowercase sans serif italic
+                  ,120380 # capital bold italic
+                  ,120458 # lowercase monospaced
+                  ]
+_CHAR_MAPS = map(lambda (sc): generate_char_map(sc), _STARTING_CODES)
+
+@xenoglossia_fn
+@string_fn
+def ransomize(input, *args):
+    """
+    Replaces each character of *input* with its companion character from a random code point.
+    """
+    return "".join(map(lambda (c): _CHAR_MAPS[randint(0, len(_CHAR_MAPS)-1)].get(c, c), input.upper()))
 
 @xenoglossia_fn
 @string_fn
