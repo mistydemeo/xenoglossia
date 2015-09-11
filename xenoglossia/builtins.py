@@ -226,7 +226,7 @@ def flirt(input, *args):
     Converts every character of *input* to full-width.
     """
 
-    char_map = {i: ("\\U%08x" % (i - 33 + 65281)).decode('unicode-escape') for i in range(33, 126)}
+    char_map = {i: ("\\U%08x" % (i - 33 + 65281)).decode('unicode-escape') for i in range(33, 127)}
     # don't forget the ideographic space character! it's important!
     char_map[32] = ("\\U%08x" % 12288).decode('unicode-escape')
 
