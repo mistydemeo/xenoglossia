@@ -218,6 +218,7 @@ def illuminate(input, *args):
     else:
         return input[0] + input[1:].lower()
 
+
 @xenoglossia_fn
 @string_fn
 def flirt(input, *args):
@@ -230,6 +231,7 @@ def flirt(input, *args):
     char_map[32] = ("\\U%08x" % 12288).decode('unicode-escape')
 
     return ''.join([char_map.get(ord(c), c) for c in input])
+
 
 @xenoglossia_fn
 @array_fn
