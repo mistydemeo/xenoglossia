@@ -214,8 +214,33 @@ def buttify(input, *args):
     """
     return re.sub("(?i)(butt|but)", u"\U0001F351", input)
 
-_DOTMATRIX_CHARS = ["⡮⢵", "⣟⣳", "⢎⣉", "⣏⡱", "⣟⣋", "⡯⠍", "⢎⣥", "⡗⢺", "⡇", "⢉⠏", "⡧⢎", "⣇⣀", "⡗⢺"
-                   ,"⡗⢼", "⢎⡱", "⡯⠕", "⢎⣵", "⡯⢕", "⣚⡫", "⢹⡏", "⢇⡸", "⢣⡜", "⡧⢼", "⡱⢎", "⢱⡎", "⣩⣋"]
+_DOTMATRIX_CHARS = [u"\u286E\u28b5"
+                   ,u"\u28df\u28F3"
+                   ,u"\u288e\u28c9"
+                   ,u"\u28cf\u2871"
+                   ,u"\u28df\u28cb"
+                   ,u"\u286f\u280d"
+                   ,u"\u288e\u28e5"
+                   ,u"\u2857\u28ba"
+                   ,u"\u2847"
+                   ,u"\u28c9\u280f"
+                   ,u"\u2867\u288e"
+                   ,u"\u28c7\u28c0"
+                   ,u"\u2857\u28ba"
+                   ,u"\u2857\u28bc"
+                   ,u"\u288e\u2871"
+                   ,u"\u286f\u2815"
+                   ,u"\u288e\u28f5"
+                   ,u"\u286f\u2895"
+                   ,u"\u28da\u286b"
+                   ,u"\u28b9\u284f"
+                   ,u"\u2887\u2878"
+                   ,u"\u28a3\u285c"
+                   ,u"\u2867\u28bc"
+                   ,u"\u2871\u288e"
+                   ,u"\u28b1\u284e"
+                   ,u"\u28e9\u28cb"
+                   ]
 _DOTMATRIX_CHAR_DICT = dict(zip(ascii_uppercase, _DOTMATRIX_CHARS))
 
 @xenoglossia_fn
@@ -225,7 +250,7 @@ def dotmatrix(input, *args):
     Converts *input* into dot matrix printer format.
     (NOTA BENE: this code has not been tested on an actual dot matrix printer.)
     """
-    return "".join(map(lambda c: _DOTMATRIX_CHAR_DICT.get(c, c).decode("utf8"), input.upper()))
+    return "".join(map(lambda c: _DOTMATRIX_CHAR_DICT.get(c, c), input.upper()))
 
 @xenoglossia_fn
 @string_fn
