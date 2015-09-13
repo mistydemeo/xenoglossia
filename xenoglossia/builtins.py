@@ -1,3 +1,4 @@
+# encoding: utf-8
 from __future__ import absolute_import
 
 from .decorators import string_fn, array_fn, xenoglossia_fn
@@ -167,7 +168,22 @@ def flip(input, *args):
     """
     Returns an upside down version of *input* prepended by our favorite Flip Table dude.
     """
-    flipped_input = "".join(_FLIP_CHAR_DICT.get(c, c) for c in input[::-1])
+    char_list = []
+    pair = None
+    for c in input[::-1]:
+        if ord(c) in range(0xDC00, 0xE000):
+            # Low part of surrogate pair.  (Comes first because it's reversed.)
+            # wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates
+            pair = c
+        elif ord(c) in range(0xD800, 0xDC00):
+            # High part of surrogate pair.
+            char_list.append(c)
+            char_list.append(pair)
+            pair = None
+        else:
+            char_list.append(c)
+
+    flipped_input = "".join(_FLIP_CHAR_DICT.get(c, c) for c in char_list)
     return u"\uFF08\u256F\u00B0\u25A1\u00B0\uFF09\u256F\uFE35 " + flipped_input
 
 
