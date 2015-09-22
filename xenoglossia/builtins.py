@@ -156,18 +156,9 @@ def title(input, *args):
     return input.title()
 
 
-# Next three variables for use by the flip function
-_FROM_FLIP_CHARS = u" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ?\u203D"
-_TO_FLIP_CHARS = u" \u0250q\u0254p\u01DD\u025F\u0183\u0265\u1D09\u027E\u029El\u026Fuodb\u0279s\u0287n\u028C\u028Dx\u028Ez\u2200\u15fa\u0186p\u018E\u2132\u05E4HI\u017F\u029E\u02E5WNO\u0500Q\u0279S\u2534\u2229\u039BMX\u2144Z\u00bf\u2e18"
-_FLIP_CHAR_DICT = dict(zip(_FROM_FLIP_CHARS, _TO_FLIP_CHARS))
-
-
 @xenoglossia_fn
 @string_fn
-def flip(input, *args):
-    """
-    Returns an upside down version of *input* prepended by our favorite Flip Table dude.
-    """
+def reverse(input, *args):
     char_list = []
     pair = None
     for c in input[::-1]:
@@ -183,7 +174,23 @@ def flip(input, *args):
         else:
             char_list.append(c)
 
-    flipped_input = "".join(_FLIP_CHAR_DICT.get(c, c) for c in char_list)
+    return u"".join(char_list)
+
+
+# Next three variables for use by the flip function
+_FROM_FLIP_CHARS = u" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ?\u203D"
+_TO_FLIP_CHARS = u" \u0250q\u0254p\u01DD\u025F\u0183\u0265\u1D09\u027E\u029El\u026Fuodb\u0279s\u0287n\u028C\u028Dx\u028Ez\u2200\u15fa\u0186p\u018E\u2132\u05E4HI\u017F\u029E\u02E5WNO\u0500Q\u0279S\u2534\u2229\u039BMX\u2144Z\u00bf\u2e18"
+_FLIP_CHAR_DICT = dict(zip(_FROM_FLIP_CHARS, _TO_FLIP_CHARS))
+
+
+@xenoglossia_fn
+@string_fn
+def flip(input, *args):
+    """
+    Returns an upside down version of *input* prepended by our favorite Flip Table dude.
+    """
+
+    flipped_input = "".join(_FLIP_CHAR_DICT.get(c, c) for c in reverse(input))
     return u"\uFF08\u256F\u00B0\u25A1\u00B0\uFF09\u256F\uFE35 " + flipped_input
 
 
